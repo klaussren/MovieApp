@@ -225,7 +225,7 @@ class HomeMovieFragment : Fragment() {
                     homeMovieFragmentBinding.rvMoviesPopularity.isVisible =false
 
                     homeMovieFragmentBinding.rvMoviesSearch.isVisible =true
-                  //  homeMovieFragmentBinding.rvMoviesSearch.scrollToPosition(0)
+
 
 
                     loadDataSearch(query)
