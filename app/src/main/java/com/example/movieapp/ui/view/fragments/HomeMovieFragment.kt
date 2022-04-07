@@ -219,12 +219,6 @@ class HomeMovieFragment : Fragment() {
 
             override fun onQueryTextChange(query: String?): Boolean {
                 if (!query.isNullOrEmpty()) {
-                    homeMovieFragmentBinding.tvTitleTopRated.isVisible =false
-                    homeMovieFragmentBinding.rvMoviesTopRated.isVisible =false
-                    homeMovieFragmentBinding.tvTitlePopularity.isVisible =false
-                    homeMovieFragmentBinding.rvMoviesPopularity.isVisible =false
-
-                    homeMovieFragmentBinding.rvMoviesSearch.isVisible =true
 
 
 
