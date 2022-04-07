@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="DesignSurface">
+    <option name="filePathToZoomLevelMap">
+      <map>
+        <entry key="../../../../../layout/custom_preview.xml" value="0.15104166666666666" />
+        <entry key="app/src/main/res/drawable/ic_star_top_rated.xml" value="0.171" />
+        <entry key="app/src/main/res/layout/activity_main.xml" value="0.16" />
+        <entry key="app/src/main/res/layout/fragment_detail_movie.xml" value="0.22" />
+        <entry key="app/src/main/res/layout/home_movie_fragment.xml" value="0.14" />
+        <entry key="app/src/main/res/layout/item_movie.xml" value="0.25" />
+        <entry key="app/src/main/res/layout/item_movie_popularity.xml" value="0.25" />
+        <entry key="app/src/main/res/layout/item_movie_top_rated.xml" value="0.33" />
+        <entry key="app/src/main/res/layout/item_video_movie.xml" value="0.33" />
+        <entry key="app/src/main/res/layout/repos_load_state_footer_view_item.xml" value="0.33" />
+        <entry key="app/src/main/res/menu/menu_gallery.xml" value="0.33125" />
+      </map>
+    </option>
+  </component>
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" default="true" project-jdk-name="11" project-jdk-type="JavaSDK">
+    <output url="file://$PROJECT_DIR$/build/classes" />
+  </component>
+  <component name="ProjectType">
+    <option name="id" value="Android" />
+  </component>
+</project>

@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/mobile_navigation"
+    app:startDestination="@id/homeMovieFragment2">
+    <fragment
+        android:id="@+id/homeMovieFragment2"
+        android:name="com.example.movieapp.ui.view.fragments.HomeMovieFragment"
+        android:label="MovieApp" >
+        <action
+            android:id="@+id/action_homeMovieFragment2_to_detailMovieFragment3"
+            app:destination="@id/detailMovieFragment3"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right" />
+    </fragment>
+    <fragment
+        android:id="@+id/detailMovieFragment3"
+        android:name="com.example.movieapp.ui.view.fragments.DetailMovieFragment"
+        android:label="@string/detail_fragment_title"
+        tools:layout="@layout/fragment_detail_movie" >
+        <action
+            android:id="@+id/action_detailMovieFragment3_to_homeMovieFragment2"
+            app:destination="@id/homeMovieFragment2" />
+        <argument
+            android:name="movie"
+            app:argType="com.example.movieapp.domain.model.Movie" />
+    </fragment>
+</navigation>

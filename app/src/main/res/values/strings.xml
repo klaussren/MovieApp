@@ -1,0 +1,12 @@
+<resources>
+    <string name="app_name">MovieApp</string>
+    <string name="popularity">Most Popular</string>
+    <string name="original_languaje">Original Languaje</string>
+    <string name="relese_date">Release date</string>
+    <string name="vote_average">Vote average</string>
+
+    <string name="top_rated_title">Top Rated</string>
+    <string name="detail_fragment_title">Detail Movie</string>
+    <string name="retry">Retry</string>
+    <string name="view_more">see more</string>
+</resources>

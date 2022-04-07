@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="ds">
+        <attr name="background_color" format="color"/>
+        <attr name="text_color" format="color"/>
+        <attr name="button_color" format="color"/>
+    </declare-styleable>
+
+
+    <attr name="customfont" format="enum">
+        <enum name="Roboto_Regular" value="0" />
+        <enum name="Roboto_Italic" value="1" />
+        <enum name="Roboto_LightItalic" value="2" />
+        <enum name="Roboto_Thin" value="3" />
+        <enum name="Roboto_Light" value="4" />
+        <enum name="Roboto_Bold" value="5" />
+    </attr>
+</resources>

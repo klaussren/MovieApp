@@ -1,0 +1,200 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/scrollViewDetail"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/black"
+    tools:context=".ui.view.fragments.DetailMovieFragment">
+
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/viewDetailConstraint"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <TextView
+            android:id="@+id/tvTitleDetail"
+            style="@style/defaultTexTitle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="5dp"
+            android:layout_marginRight="10dp"
+            android:text="Titulo Pelicula"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+
+        <ImageView
+            android:id="@+id/ivDateRelease"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="5dp"
+            android:src="@drawable/ic_date_movie"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tvTitleDetail">
+
+        </ImageView>
+
+        <TextView
+            android:id="@+id/tvReleaseDateDetail"
+            style="@style/defaultTexDateRate"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:text="2000/22/05"
+            app:layout_constraintStart_toEndOf="@+id/ivDateRelease"
+            app:layout_constraintTop_toBottomOf="@+id/tvTitleDetail">
+
+        </TextView>
+
+        <ImageView
+            android:id="@+id/ivStarRated"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="5dp"
+            android:src="@drawable/ic_star_top_rated"
+            app:layout_constraintStart_toEndOf="@+id/tvReleaseDateDetail"
+            app:layout_constraintTop_toBottomOf="@+id/tvTitleDetail">
+
+        </ImageView>
+
+        <TextView
+            android:id="@+id/tvRate"
+            style="@style/defaultTexDateRate"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:text="2000/22/05"
+            app:layout_constraintStart_toEndOf="@+id/ivStarRated"
+            app:layout_constraintTop_toBottomOf="@+id/tvTitleDetail">
+
+        </TextView>
+
+        <View
+            android:id="@+id/topLineHorizontalView"
+            android:layout_width="0dp"
+            android:layout_height="1.0dp"
+            android:layout_marginTop="10dp"
+            android:background="@color/backgrounVideoColor"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/ivDateRelease" />
+
+        <ImageView
+            android:id="@+id/ivMovieDetail"
+            android:layout_width="0dp"
+            android:layout_height="250dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginRight="10dp"
+            app:layout_constraintEnd_toStartOf="@+id/glineDetail"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/topLineHorizontalView"></ImageView>
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/glineDetail"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="0.45">
+
+        </androidx.constraintlayout.widget.Guideline>
+
+        <TextView
+            android:id="@+id/tvDescriptionDetail"
+            style="@style/defaultTexOverview"
+            android:layout_width="0dp"
+            android:layout_height="230dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginRight="10dp"
+            android:autoSizeMaxTextSize="20sp"
+            android:autoSizeMinTextSize="18sp"
+            android:autoSizeTextType="uniform"
+            android:maxLength="230"
+
+            android:text=" asdaasdfasdfaasdfasdsdfasdfasasdfasdfasdasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfafasdfasdfasdfasdfasasdfasdfasdfasdfsadfasdfasdfasdfasdfasdfasdasdfasdfasdfaasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdf asdf asdfa dfas dfasd fasd fasd fas dfas dfa sdf asdf asdf asd as dffasdfasfasdfa"
+
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/glineDetail"
+            app:layout_constraintTop_toBottomOf="@+id/topLineHorizontalView" />
+        <TextView
+            android:id="@+id/tvVieMore"
+            style="@style/defaultTexButton"
+            android:layout_width="0dp"
+            android:layout_height="20dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:autoSizeMaxTextSize="20sp"
+            android:autoSizeMinTextSize="18sp"
+            android:autoSizeTextType="uniform"
+            android:maxLength="250"
+            android:ellipsize="end"
+            android:text="@string/view_more"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tvDescriptionDetail"
+            />
+        <TextView
+            android:id="@+id/tvDescriptionDetail2"
+            style="@style/defaultTexOverview"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+
+            android:layout_marginRight="10dp"
+            android:autoSizeMaxTextSize="20sp"
+            android:autoSizeMinTextSize="18sp"
+            android:autoSizeTextType="uniform"
+            android:maxLength="700"
+
+            android:visibility="gone"
+            android:text=" asdaasdfasdfaasdfasdsdfasdfasasdfasdfasdasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfafasdfasdfasdfasdfasasdfasdfasdfasdfsadfasdfasdfasdfasdfasdfasdasdfasdfasdfaasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdf asdf asdfa dfas dfasd fasd fasd fas dfas dfa sdf asdf asdf asd as dffasdfasfasdfa"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tvDescriptionDetail"
+             />
+        <TextView
+            android:id="@+id/tvTitleVideos"
+            style="@style/defaultTexOverview"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginRight="10dp"
+            android:text="Videos"
+
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tvDescriptionDetail2" />
+
+        <View
+            android:id="@+id/topLineHorizontalView2"
+            android:layout_width="0dp"
+            android:layout_height="1.0dp"
+            android:background="@color/backgrounVideoColor"
+            app:layout_constraintEnd_toEndOf="parent"
+
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tvTitleVideos" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rvVideosMovie"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginRight="10dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/topLineHorizontalView2" />
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</ScrollView>

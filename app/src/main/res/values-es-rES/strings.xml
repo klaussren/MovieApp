@@ -1,0 +1,13 @@
+<resources>
+    <string name="app_name">MovieApp</string>
+    <string name="popularity">Mas Populares</string>
+    <string name="original_languaje">Lenguaje original</string>
+    <string name="relese_date">Lanzamiento</string>
+    <string name="vote_average">Voto promedio</string>
+
+    <string name="top_rated_title">Mas Valoradas</string>
+    <string name="detail_fragment_title">Descripcion Pelicula</string>
+    <string name="retry">Reintentar</string>
+    <string name="view_more">ver más</string>
+
+</resources>
