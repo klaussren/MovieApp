@@ -9,20 +9,21 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.movieapp.R
+import com.example.movieapp.data.database.entities.MovieEntity
 import com.example.movieapp.databinding.ItemMoviePopularityBinding
 import com.example.movieapp.domain.model.Movie
 import com.example.movieapp.ui.view.fragments.HomeMovieFragmentDirections
 
-class MoviePagingPopularAdapter : PagingDataAdapter<Movie, MoviePagingPopularAdapter.MyViewHolder>(DIFF_UTIL) {
+class MoviePagingPopularAdapter : PagingDataAdapter<MovieEntity, MoviePagingPopularAdapter.MyViewHolder>(DIFF_UTIL) {
 
 
     companion object {
-        val DIFF_UTIL = object : DiffUtil.ItemCallback<Movie>() {
-            override fun areItemsTheSame(oldItem: Movie, newItem: Movie): Boolean {
+        val DIFF_UTIL = object : DiffUtil.ItemCallback<MovieEntity>() {
+            override fun areItemsTheSame(oldItem: MovieEntity, newItem: MovieEntity): Boolean {
                 return oldItem.id == newItem.id
             }
 
-            override fun areContentsTheSame(oldItem: Movie, newItem: Movie): Boolean {
+            override fun areContentsTheSame(oldItem: MovieEntity, newItem: MovieEntity): Boolean {
                 return oldItem == newItem
             }
         }
@@ -57,7 +58,7 @@ class MoviePagingPopularAdapter : PagingDataAdapter<Movie, MoviePagingPopularAda
     inner class MyViewHolder(val viewDataBinding: ItemMoviePopularityBinding) :
         RecyclerView.ViewHolder(viewDataBinding.root) {
 
-        fun render(movieModel: Movie) {
+        fun render(movieModel: MovieEntity) {
 
             viewDataBinding.tvTitle.setText(movieModel.title)
             viewDataBinding.tvPopular.setText(movieModel.popularity)

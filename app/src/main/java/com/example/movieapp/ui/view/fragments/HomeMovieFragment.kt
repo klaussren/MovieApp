@@ -159,14 +159,14 @@ class HomeMovieFragment : Fragment() {
                // showEmptyList(isListEmpty)
 
                 // Only show the list if refresh succeeds.
-                homeMovieFragmentBinding.rvMoviesPopularity.isVisible = loadState.source.refresh is LoadState.NotLoading
+                homeMovieFragmentBinding.rvMoviesPopularity.isVisible = loadState.mediator?.refresh is LoadState.NotLoading
                 // Show loading spinner during initial load or refresh.
-                homeMovieFragmentBinding.progressBar.isVisible = loadState.source.refresh is LoadState.Loading
+                homeMovieFragmentBinding.progressBar.isVisible = loadState.mediator?.refresh is LoadState.Loading
                 // Show the retry state if initial load or refresh fails.
-                homeMovieFragmentBinding.retryButton.isVisible = loadState.source.refresh is LoadState.Error
+                homeMovieFragmentBinding.retryButton.isVisible = loadState.mediator?.refresh is LoadState.Error
 
                 // Toast on any error, regardless of whether it came from RemoteMediator or PagingSource
-                val errorState = loadState.source.append as? LoadState.Error
+                val errorState = loadState.mediator?.append as? LoadState.Error
                     ?: loadState.source.prepend as? LoadState.Error
                     ?: loadState.append as? LoadState.Error
                     ?: loadState.prepend as? LoadState.Error
@@ -198,7 +198,7 @@ class HomeMovieFragment : Fragment() {
 
         lifecycleScope.launch {
             moviesViewModel.popularMovies().collect {
-                Log.d("aaa", "load: $it")
+                Log.d("aaa", "load: ${it.toString()}")
                 moviePagingPopularAdapter.submitData(it)
 
             }

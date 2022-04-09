@@ -16,6 +16,7 @@ import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
+import com.example.movieapp.data.database.entities.MovieEntity
 import com.example.movieapp.databinding.FragmentDetailMovieBinding
 import com.example.movieapp.domain.model.Movie
 import com.example.movieapp.ui.view.adapter.VideoMovieAdapter
@@ -30,7 +31,7 @@ class DetailMovieFragment : Fragment() {
 
     private val args: DetailMovieFragmentArgs by navArgs()
     private val moviesViewModel: MoviesViewModel by viewModels()
-    private lateinit var movie: Movie
+    private lateinit var movie: MovieEntity
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,

@@ -34,12 +34,12 @@ class MoviePagingTopRatedAdapter : PagingDataAdapter<Movie, MoviePagingTopRatedA
         if (item != null) {
             holder.render(item)
 
-            holder.itemView.setOnClickListener {mView ->
-                val direction = HomeMovieFragmentDirections.actionHomeMovieFragment2ToDetailMovieFragment3(item)
-                mView.findNavController().navigate(direction)
+            /* holder.itemView.setOnClickListener {mView ->
+                 val direction = HomeMovieFragmentDirections.actionHomeMovieFragment2ToDetailMovieFragment3(item)
+                 mView.findNavController().navigate(direction)
 
-            }
-        }
+             }*/
+         }
 
     }
 

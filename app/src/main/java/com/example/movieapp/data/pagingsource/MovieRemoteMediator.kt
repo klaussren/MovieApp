@@ -1,11 +1,13 @@
 package com.example.movieapp.data.pagingsource
 
+import android.util.Log
 import androidx.paging.ExperimentalPagingApi
 import androidx.paging.LoadType
 import androidx.paging.PagingState
 import androidx.paging.RemoteMediator
 import androidx.room.withTransaction
 import com.example.movieapp.data.database.MovieDatabase
+import com.example.movieapp.data.database.entities.MovieEntity
 import com.example.movieapp.data.database.entities.MovieRemoteKeys
 import com.example.movieapp.data.database.entities.toDatabase
 import com.example.movieapp.data.network.MovieService
@@ -14,7 +16,7 @@ import com.example.movieapp.domain.model.Movie
 @ExperimentalPagingApi
 class MovieRemoteMediator(
     private val api: MovieService,
-    private val movieDatabase: MovieDatabase): RemoteMediator<Int, Movie>() {
+    private val movieDatabase: MovieDatabase): RemoteMediator<Int, MovieEntity>() {
 
 
     private val getMoviesDao = movieDatabase.getMovieDao()
@@ -23,7 +25,7 @@ class MovieRemoteMediator(
 
 
 
-    override suspend fun load(loadType: LoadType, state: PagingState<Int, Movie>): MediatorResult {
+    override suspend fun load(loadType: LoadType, state: PagingState<Int, MovieEntity>): MediatorResult {
         return try {
         val currentPage = when (loadType) {
             LoadType.REFRESH -> {
@@ -52,7 +54,8 @@ class MovieRemoteMediator(
 
             val prevPage = if (currentPage == 1) null else currentPage - 1
             val nextPage = if (endOfPaginationReached) null else currentPage + 1
-
+            Log.i("prevPage",prevPage.toString())
+            Log.i("nextPage",nextPage.toString())
             movieDatabase.withTransaction {
                 if (loadType == LoadType.REFRESH) {
                     getMoviesDao.clearMovies()
@@ -77,7 +80,7 @@ class MovieRemoteMediator(
 
 
     private suspend fun getRemoteKeyClosestToCurrentPosition(
-        state: PagingState<Int, Movie>
+        state: PagingState<Int, MovieEntity>
     ): MovieRemoteKeys? {
         return state.anchorPosition?.let { position ->
             state.closestItemToPosition(position)?.id?.let { id ->
@@ -87,7 +90,7 @@ class MovieRemoteMediator(
     }
 
     private suspend fun getRemoteKeyForFirstItem(
-        state: PagingState<Int, Movie>
+        state: PagingState<Int, MovieEntity>
     ): MovieRemoteKeys? {
         return state.pages.firstOrNull { it.data.isNotEmpty() }?.data?.firstOrNull()
             ?.let { movie ->
@@ -96,7 +99,7 @@ class MovieRemoteMediator(
     }
 
     private suspend fun getRemoteKeyForLastItem(
-        state: PagingState<Int, Movie>
+        state: PagingState<Int, MovieEntity>
     ): MovieRemoteKeys? {
         return state.pages.lastOrNull { it.data.isNotEmpty() }?.data?.lastOrNull()
             ?.let { movie ->

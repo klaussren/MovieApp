@@ -19,7 +19,7 @@ import javax.inject.Inject
 
 class MovieRepository @Inject constructor(
     private val api: MovieService,
-   // private val movieDataBase:MovieDatabase
+    private val movieDataBase:MovieDatabase
 ) {
 
 
@@ -33,10 +33,15 @@ class MovieRepository @Inject constructor(
         ).flow
     }
 
-    /* @OptIn(ExperimentalPagingApi::class)
-     fun getAllPopularMoviesFromApi(): Flow<PagingData<Movie>> {
+   @OptIn(ExperimentalPagingApi::class)
+     fun getAllPopularMoviesFromApi(): Flow<PagingData<MovieEntity>> {
 
-         val pagingSourceFactory = { movieDataBase.getMovieDao().getAllMovies() }
+
+         val pagingSourceFactory = {
+             movieDataBase.getMovieDao().getAllMovies()
+         }
+
+
          return Pager(
              config = PagingConfig(
                  pageSize = NETWORK_PAGE_SIZE,
@@ -46,23 +51,23 @@ class MovieRepository @Inject constructor(
                  movieDatabase = movieDataBase
 
              ),
-             pagingSourceFactory = pagingSourceFactory//{ PopularPagingSurce(api) }
+             pagingSourceFactory =  pagingSourceFactory//{ PopularPagingSurce(api) }
          ).flow
      }
 
-  */
+    /*
 
-     fun getAllPopularMoviesFromApi(): Flow<PagingData<Movie>> {
+       fun getAllPopularMoviesFromApi(): Flow<PagingData<Movie>> {
 
-         return Pager(
-             config = PagingConfig(
-                 pageSize = NETWORK_PAGE_SIZE,
-                 enablePlaceholders = false
-             ),
+           return Pager(
+               config = PagingConfig(
+                   pageSize = NETWORK_PAGE_SIZE,
+                   enablePlaceholders = false
+               ),
 
-             pagingSourceFactory =    { PopularPagingSurce(api) }
-         ).flow
-     }
+               pagingSourceFactory =    { PopularPagingSurce(api) }
+           ).flow
+       }  */
 
     suspend fun getAllVideosMovie(id:Int):List<Video>{
         val response: List<VideoModel> = api.getVideosMovie(id).videosModels
@@ -84,7 +89,7 @@ class MovieRepository @Inject constructor(
 
 
     companion object {
-        private const val NETWORK_PAGE_SIZE = 3
+        private const val NETWORK_PAGE_SIZE = 1
     }
 
 

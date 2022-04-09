@@ -17,7 +17,7 @@ abstract class MovieDatabase: RoomDatabase() {
     abstract fun getMovieDao():MovieDao
     abstract fun movieRemoteKeysDao(): MovieRemoteKeysDao
 
-  /*  companion object {
+    companion object {
 
         @Volatile
         private var INSTANCE: MovieDatabase? = null
@@ -32,5 +32,5 @@ abstract class MovieDatabase: RoomDatabase() {
             Room.databaseBuilder(context.applicationContext,
                 MovieDatabase::class.java, "Movie.db")
                 .build()
-    }*/
+    }
 }

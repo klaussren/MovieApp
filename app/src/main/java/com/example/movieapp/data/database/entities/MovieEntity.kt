@@ -11,7 +11,7 @@ import kotlinx.parcelize.Parcelize
 @Parcelize
 @Entity(tableName = "movie_table")
 data class MovieEntity(
-    @PrimaryKey(autoGenerate = false)
+    @PrimaryKey(autoGenerate = true)
     @ColumnInfo(name="id")  val id: Int,
     @ColumnInfo(name="title")  val title: String,
     @ColumnInfo(name="overview")  val overview: String,

@@ -38,11 +38,11 @@ class MovieSearchPagingAdapter: PagingDataAdapter<Movie, MovieSearchPagingAdapte
         if (item != null) {
             holder.render(item)
 
-            holder.itemView.setOnClickListener {mView ->
+          /*  holder.itemView.setOnClickListener {mView ->
                 val direction = HomeMovieFragmentDirections.actionHomeMovieFragment2ToDetailMovieFragment3(item)
                 mView.findNavController().navigate(direction)
 
-            }
+            }*/
         }
 
     }

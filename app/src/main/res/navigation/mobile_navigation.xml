@@ -26,6 +26,6 @@
             app:destination="@id/homeMovieFragment2" />
         <argument
             android:name="movie"
-            app:argType="com.example.movieapp.domain.model.Movie" />
+            app:argType="com.example.movieapp.data.database.entities.MovieEntity" />
     </fragment>
 </navigation>

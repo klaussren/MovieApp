@@ -6,6 +6,7 @@ import androidx.lifecycle.viewModelScope
 import androidx.paging.PagingData
 
 import androidx.paging.cachedIn
+import com.example.movieapp.data.database.entities.MovieEntity
 import com.example.movieapp.data.network.MovieService
 import com.example.movieapp.domain.GetMovieSearchUseCase
 import com.example.movieapp.domain.GetPopularMoviesUseCase
@@ -32,7 +33,7 @@ class MoviesViewModel @Inject  constructor(
     val isLoading = MutableLiveData<Boolean>()
 
     private var currentTopRatedResult: Flow<PagingData<Movie>>? = null
-    private var currentPopularResult: Flow<PagingData<Movie>>? = null
+    private var currentPopularResult: Flow<PagingData<MovieEntity>>? = null
     private var currentQueryValue: String? = null
     private var currentSearchResult: Flow<PagingData<Movie>>? = null
 
@@ -51,7 +52,7 @@ class MoviesViewModel @Inject  constructor(
     }
 
 
-    fun popularMovies(): Flow<PagingData<Movie>> {
+    fun popularMovies(): Flow<PagingData<MovieEntity>> {
         isLoading.postValue(true)
         val lastResult = currentPopularResult
         if(lastResult != null){
@@ -59,7 +60,7 @@ class MoviesViewModel @Inject  constructor(
             return lastResult
 
         }
-        val newResult: Flow<PagingData<Movie>> = getPopularMoviesUseCase().cachedIn(viewModelScope)
+        val newResult: Flow<PagingData<MovieEntity>> = getPopularMoviesUseCase().cachedIn(viewModelScope)
         currentPopularResult = newResult
         isLoading.postValue(false)
         return newResult
