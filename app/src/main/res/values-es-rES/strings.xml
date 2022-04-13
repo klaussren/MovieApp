@@ -9,5 +9,5 @@
     <string name="detail_fragment_title">Descripcion Pelicula</string>
     <string name="retry">Reintentar</string>
     <string name="view_more">ver más</string>
-
+    <string name="no_results">Sin Resultados</string>
 </resources>

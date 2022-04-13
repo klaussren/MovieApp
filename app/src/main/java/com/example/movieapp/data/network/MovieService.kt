@@ -29,10 +29,11 @@ class MovieService @Inject constructor(private val api:MovieApiClient){
     }
 
 
-    suspend fun getVideosMovie(id:Int):VideosModels{
+    suspend fun getVideosMovie(id:String):VideosModels{
         return withContext(Dispatchers.IO) {
-           val idMovie = id.toString()
-            val response= api.getAllVideosMovie(idMovie)
+
+            val response= api.getAllVideosMovie(id)
+            Log.i("retorno de videos",response.toString())
             response.body()?: VideosModels(emptyList())
         }
     }

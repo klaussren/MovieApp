@@ -1,5 +1,6 @@
 package com.example.movieapp.ui.viewmodel
 
+import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -53,16 +54,16 @@ class MoviesViewModel @Inject  constructor(
 
 
     fun popularMovies(): Flow<PagingData<MovieEntity>> {
-        isLoading.postValue(true)
+
         val lastResult = currentPopularResult
         if(lastResult != null){
-            isLoading.postValue(false)
+
             return lastResult
 
         }
         val newResult: Flow<PagingData<MovieEntity>> = getPopularMoviesUseCase().cachedIn(viewModelScope)
         currentPopularResult = newResult
-        isLoading.postValue(false)
+
         return newResult
 
     }
@@ -81,13 +82,15 @@ class MoviesViewModel @Inject  constructor(
     }
 
 
-    fun getVideosMovie(id:Int) {
+    fun getVideosMovie(id:String) {
 
         viewModelScope.launch {
             val resultVideosMovies = getVideosMovies(id)
-            if(!resultVideosMovies.isNullOrEmpty()){
+            Log.i("retorno de service",resultVideosMovies.toString())
+
                 movieVideo.postValue(resultVideosMovies)
-            }
+
+
 
         }
 

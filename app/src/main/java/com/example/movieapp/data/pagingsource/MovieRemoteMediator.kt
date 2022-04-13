@@ -9,7 +9,7 @@ import androidx.room.withTransaction
 import com.example.movieapp.data.database.MovieDatabase
 import com.example.movieapp.data.database.entities.MovieEntity
 import com.example.movieapp.data.database.entities.MovieRemoteKeys
-import com.example.movieapp.data.database.entities.toDatabase
+
 import com.example.movieapp.data.network.MovieService
 import com.example.movieapp.domain.model.Movie
 
@@ -49,13 +49,15 @@ class MovieRemoteMediator(
                 nextPage
             }
         }
+            Log.i("currentPage",currentPage.toString())
             val response = api.getPopularMovies(page = currentPage).moviesModels
             val endOfPaginationReached = response.isEmpty()
-
+            Log.i("endOfPag",endOfPaginationReached.toString())
             val prevPage = if (currentPage == 1) null else currentPage - 1
             val nextPage = if (endOfPaginationReached) null else currentPage + 1
             Log.i("prevPage",prevPage.toString())
             Log.i("nextPage",nextPage.toString())
+
             movieDatabase.withTransaction {
                 if (loadType == LoadType.REFRESH) {
                     getMoviesDao.clearMovies()
@@ -68,8 +70,9 @@ class MovieRemoteMediator(
                         nextPage = nextPage
                     )
                 }
+                Log.i("keys",keys.toString())
                 movieRemoteKeysDao.insertAll(remoteKey = keys)
-                getMoviesDao.insertAll(movie = response.map{it.toDatabase()})
+                getMoviesDao.insertAll(movie = response)
             }
             MediatorResult.Success(endOfPaginationReached = endOfPaginationReached)
         } catch (e: Exception) {

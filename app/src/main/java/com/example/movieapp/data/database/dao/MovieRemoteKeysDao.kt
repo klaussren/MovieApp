@@ -13,7 +13,7 @@ interface MovieRemoteKeysDao {
     suspend fun insertAll(remoteKey: List<MovieRemoteKeys>)
 
     @Query("SELECT * FROM remote_keys WHERE id =:id")
-    suspend fun getRemoteKeys(id: Int): MovieRemoteKeys?
+    suspend fun getRemoteKeys(id: String): MovieRemoteKeys?
 
     @Query("DELETE FROM remote_keys")
     suspend fun clearRemoteKeys()

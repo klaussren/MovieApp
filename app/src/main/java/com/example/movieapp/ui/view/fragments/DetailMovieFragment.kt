@@ -2,6 +2,7 @@ package com.example.movieapp.ui.view.fragments
 
 import android.os.Bundle
 import android.text.InputFilter
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -18,9 +19,9 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.movieapp.data.database.entities.MovieEntity
 import com.example.movieapp.databinding.FragmentDetailMovieBinding
-import com.example.movieapp.domain.model.Movie
 import com.example.movieapp.ui.view.adapter.VideoMovieAdapter
 import com.example.movieapp.ui.viewmodel.MoviesViewModel
+import com.example.movieapp.util.Util
 import dagger.hilt.android.AndroidEntryPoint
 
 
@@ -46,17 +47,20 @@ class DetailMovieFragment : Fragment() {
 
         (activity as AppCompatActivity).supportActionBar?.title = "Descripcion Pelicula"
 
-        requireActivity().onBackPressedDispatcher.addCallback(viewLifecycleOwner, object :OnBackPressedCallback(false){
-            override fun handleOnBackPressed() {
+        requireActivity().onBackPressedDispatcher.addCallback(
+            viewLifecycleOwner,
+            object : OnBackPressedCallback(false) {
+                override fun handleOnBackPressed() {
 
-            }
-        })
+                }
+            })
+
 
         populateUI()
 
     }
 
-    fun populateUI(){
+    fun populateUI() {
         movie = args.movie
 
         Glide.with(detailMovieBinding.ivMovieDetail)
@@ -64,17 +68,18 @@ class DetailMovieFragment : Fragment() {
             .into(detailMovieBinding.ivMovieDetail)
         detailMovieBinding.tvTitleDetail.text = movie.title
         detailMovieBinding.tvReleaseDateDetail.text = movie.release_date
-        detailMovieBinding.tvRate.text= movie.vote_average
+        detailMovieBinding.tvRate.text = movie.vote_average
 
-        var textOverview:String
+        var textOverview: String
 
-        if(movie.overview.length>=210){
-            textOverview = movie.overview.substring(0,210)+"..."
+        if (movie.overview.length >= 210) {
+            textOverview = movie.overview.substring(0, 210) + "..."
             detailMovieBinding.tvDescriptionDetail.text = textOverview
 
             detailMovieBinding.tvVieMore.isVisible = true
             detailMovieBinding.tvVieMore.setOnClickListener {
-                val mParams = detailMovieBinding.tvDescriptionDetail.layoutParams as ConstraintLayout.LayoutParams
+                val mParams =
+                    detailMovieBinding.tvDescriptionDetail.layoutParams as ConstraintLayout.LayoutParams
                 mParams.apply {
                     width = 560
                     height = 770
@@ -82,36 +87,48 @@ class DetailMovieFragment : Fragment() {
                 detailMovieBinding.tvDescriptionDetail.layoutParams = mParams
                 detailMovieBinding.tvDescriptionDetail.filters += InputFilter.LengthFilter(260)
 
-                detailMovieBinding.tvDescriptionDetail.text = movie.overview.substring(0,211)
+                detailMovieBinding.tvDescriptionDetail.text = movie.overview.substring(0, 211)
                 detailMovieBinding.tvDescriptionDetail2.isVisible = true
                 detailMovieBinding.tvDescriptionDetail2.text = movie.overview.substring(211)
                 detailMovieBinding.tvVieMore.isVisible = false
             }
 
-        }
-        else
-        {
+        } else {
             textOverview = movie.overview
             detailMovieBinding.tvDescriptionDetail.text = textOverview
             detailMovieBinding.tvVieMore.isVisible = false
             detailMovieBinding.tvDescriptionDetail2.isVisible = false
         }
 
+        if (Util().hasInternetConnection(requireContext())) {
 
-        moviesViewModel.getVideosMovie(movie.id)
-        moviesViewModel.movieVideo.observe(viewLifecycleOwner, Observer {
+            moviesViewModel.getVideosMovie(movie.id)
+            moviesViewModel.movieVideo.observe(viewLifecycleOwner, Observer {
+                Log.i("retorno de service",it.toString())
+                if (!it.isNullOrEmpty()) {
+                    detailMovieBinding.emptyListVideo.isVisible = false
+                    detailMovieBinding.rvVideosMovie.layoutManager =
+                        LinearLayoutManager(context, RecyclerView.HORIZONTAL, false)
 
-            detailMovieBinding.rvVideosMovie.layoutManager =
-                LinearLayoutManager(context, RecyclerView.HORIZONTAL, false)
+                    detailMovieBinding.rvVideosMovie.isVisible = true
+                    detailMovieBinding.rvVideosMovie.adapter = VideoMovieAdapter(it)
+                    detailMovieBinding.rvVideosMovie.adapter!!.notifyDataSetChanged()
+                } else {
+                    detailMovieBinding.rvVideosMovie.isVisible = false
+                    detailMovieBinding.emptyListVideo.isVisible = true
 
-            detailMovieBinding.rvVideosMovie.adapter = VideoMovieAdapter(it)
-            detailMovieBinding.rvVideosMovie.adapter!!.notifyDataSetChanged()
+                }
 
 
-        })
+            })
+        }
+        else{
+            detailMovieBinding.rvVideosMovie.isVisible = false
+            detailMovieBinding.emptyListVideo.isVisible = true
+        }
+
 
     }
-
 
 
 }

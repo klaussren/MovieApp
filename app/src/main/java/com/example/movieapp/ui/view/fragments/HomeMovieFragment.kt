@@ -72,15 +72,18 @@ class HomeMovieFragment : Fragment() {
     private fun initRecyclerViewShearch() {
 
         movieSearchPagingAdapter = MovieSearchPagingAdapter()
-        homeMovieFragmentBinding.retryButton.setOnClickListener { movieSearchPagingAdapter.retry() }
+      //  homeMovieFragmentBinding.retryButton.setOnClickListener { movieSearchPagingAdapter.retry() }
         homeMovieFragmentBinding.rvMoviesSearch.apply {
             layoutManager=LinearLayoutManager(context, RecyclerView.VERTICAL,false)
-            adapter = movieSearchPagingAdapter.withLoadStateHeaderAndFooter(
+            adapter = movieSearchPagingAdapter
+
+
+            /*    movieSearchPagingAdapter.withLoadStateHeaderAndFooter(
                 header = ReposLoadStateAdapter { movieSearchPagingAdapter.retry() },
                 footer = ReposLoadStateAdapter { movieSearchPagingAdapter.retry() }
-            )
+            )*/
 
-            movieSearchPagingAdapter.addLoadStateListener { loadState ->
+           /* movieSearchPagingAdapter.addLoadStateListener { loadState ->
                 // show empty list
                 val isListEmpty = loadState.refresh is LoadState.NotLoading && movieSearchPagingAdapter.itemCount == 0
                 // showEmptyList(isListEmpty)
@@ -105,7 +108,7 @@ class HomeMovieFragment : Fragment() {
                     ).show()
                 }
             }
-
+*/
         }
 
 
@@ -142,7 +145,7 @@ class HomeMovieFragment : Fragment() {
 
     private fun initRecyclerViewPopular() {
         moviePagingPopularAdapter =MoviePagingPopularAdapter()
-        homeMovieFragmentBinding.retryButton.setOnClickListener { moviePagingPopularAdapter.retry() }
+
         homeMovieFragmentBinding.rvMoviesPopularity.apply {
 
             layoutManager= LinearLayoutManager(context, RecyclerView.VERTICAL,false)
@@ -151,23 +154,27 @@ class HomeMovieFragment : Fragment() {
                 header = ReposLoadStateAdapter { moviePagingPopularAdapter.retry() },
                 footer = ReposLoadStateAdapter { moviePagingPopularAdapter.retry() }
             )
+            homeMovieFragmentBinding.retryButton.setOnClickListener { moviePagingPopularAdapter.retry() }
+           // isVisible =true
 
            moviePagingPopularAdapter.addLoadStateListener { loadState ->
 
                 // show empty list
                 val isListEmpty = loadState.refresh is LoadState.NotLoading && moviePagingPopularAdapter.itemCount == 0
-               // showEmptyList(isListEmpty)
+
+
+                homeMovieFragmentBinding.emptyList.isVisible = isListEmpty
 
                 // Only show the list if refresh succeeds.
-                homeMovieFragmentBinding.rvMoviesPopularity.isVisible = loadState.mediator?.refresh is LoadState.NotLoading
+                homeMovieFragmentBinding.rvMoviesPopularity.isVisible = loadState.source.refresh is LoadState.NotLoading || loadState.mediator?.refresh is LoadState.NotLoading
                 // Show loading spinner during initial load or refresh.
                 homeMovieFragmentBinding.progressBar.isVisible = loadState.mediator?.refresh is LoadState.Loading
                 // Show the retry state if initial load or refresh fails.
-                homeMovieFragmentBinding.retryButton.isVisible = loadState.mediator?.refresh is LoadState.Error
+                homeMovieFragmentBinding.retryButton.isVisible = loadState.mediator?.refresh is LoadState.Error && moviePagingPopularAdapter.itemCount == 0
 
                 // Toast on any error, regardless of whether it came from RemoteMediator or PagingSource
                 val errorState = loadState.mediator?.append as? LoadState.Error
-                    ?: loadState.source.prepend as? LoadState.Error
+                    ?: loadState.mediator?.prepend as? LoadState.Error
                     ?: loadState.append as? LoadState.Error
                     ?: loadState.prepend as? LoadState.Error
                 errorState?.let {
@@ -198,7 +205,7 @@ class HomeMovieFragment : Fragment() {
 
         lifecycleScope.launch {
             moviesViewModel.popularMovies().collect {
-                Log.d("aaa", "load: ${it.toString()}")
+                Log.d("aaa", "load: $it")
                 moviePagingPopularAdapter.submitData(it)
 
             }
@@ -220,7 +227,7 @@ class HomeMovieFragment : Fragment() {
 
         }
     }
-
+/*
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
         super.onCreateOptionsMenu(menu, inflater)
         inflater.inflate(R.menu.menu_home,menu)
@@ -280,7 +287,7 @@ class HomeMovieFragment : Fragment() {
         })
 
     }
-
+*/
 
 
 }

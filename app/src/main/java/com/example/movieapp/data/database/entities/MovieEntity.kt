@@ -11,8 +11,8 @@ import kotlinx.parcelize.Parcelize
 @Parcelize
 @Entity(tableName = "movie_table")
 data class MovieEntity(
-    @PrimaryKey(autoGenerate = true)
-    @ColumnInfo(name="id")  val id: Int,
+    @PrimaryKey(autoGenerate = false)
+    @ColumnInfo(name="id")  val id: String,
     @ColumnInfo(name="title")  val title: String,
     @ColumnInfo(name="overview")  val overview: String,
     @ColumnInfo(name="popularity")  val popularity: String,
@@ -23,14 +23,3 @@ data class MovieEntity(
     @ColumnInfo(name="poster_path")  val poster_path: String?,
     @ColumnInfo(name="backdrop_path")  val backdrop_path: String?
 ):Parcelable
-fun MovieModel.toDatabase()= MovieEntity(id,
-    title,
-    overview,
-    popularity,
-    original_language,
-    original_title,
-    release_date,
-    vote_average,
-    poster_path,
-    backdrop_path)
-

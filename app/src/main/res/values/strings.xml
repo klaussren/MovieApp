@@ -9,4 +9,7 @@
     <string name="detail_fragment_title">Detail Movie</string>
     <string name="retry">Retry</string>
     <string name="view_more">see more</string>
+
+    <string name="no_results">No Rsults</string>
+
 </resources>
