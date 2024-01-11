@@ -34,6 +34,7 @@ class VideoMovieViewHolder (view: View): RecyclerView.ViewHolder(view) {
             }
         })
 
+        binding.tvTitleVideo.text = videoModel.name
 
     }
 

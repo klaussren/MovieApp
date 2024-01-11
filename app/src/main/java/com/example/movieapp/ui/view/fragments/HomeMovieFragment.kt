@@ -111,6 +111,20 @@ class HomeMovieFragment : Fragment() {
 
     }
 
+    private fun showEmptyList(listEmpty: Boolean) {
+        if(listEmpty){
+            Toast.makeText(
+                context,
+                "No existe esa pelicula",
+                Toast.LENGTH_SHORT
+            ).show()
+            movieSearchPagingAdapter.removeLoadStateListener { removeLoadState ->
+            homeMovieFragmentBinding.progressBar.isVisible=false
+            }
+        }
+
+    }
+
 
     private fun initRecyclerViewTopRated() {
 
@@ -197,7 +211,10 @@ class HomeMovieFragment : Fragment() {
 
         lifecycleScope.launch {
             moviesViewModel.searchMovie(query).collect {
-                movieSearchPagingAdapter.submitData(it)
+
+                    movieSearchPagingAdapter.submitData(it)
+
+
 
             }
 
